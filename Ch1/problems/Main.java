@@ -7,7 +7,12 @@ public class Main {
 	public static void main(String[] args) {
 //		System.out.println(isUnique("EricThomaseh"));
 //		System.out.println(isPermutation("AfSDsFAeSDf", "SDFDAASeffs"));
-		System.out.println(urlify("Mr John Smith       ", 14));
+//		System.out.println(urlify("Mr John Smith       ", 14));
+//		System.out.println(isPermOfPalindrome("TAct 234634 Co32a"));
+		System.out.println(oneOrLessEdits("pale", "ple"));
+		System.out.println(oneOrLessEdits("pales", "pale"));
+		System.out.println(oneOrLessEdits("pale", "bale"));
+		System.out.println(oneOrLessEdits("pale", "bake"));
 	}
 	
 	/*
@@ -84,6 +89,105 @@ public class Main {
 			}
 		}
 		return new String(c);
+	}
+	
+	/*
+	 * Problem 1.4
+	 * Write a method to determine if a given string is a permutation of
+	 * a palindrome. Ignore casing and non-letters
+	 * 
+	 */
+	
+	static boolean isPermOfPalindrome(String s) {
+		HashMap<Character, Integer> h = new HashMap<>();
+		s = s.toLowerCase();
+		int countOfCharacters = 0;
+		for (int i = 0; i < s.length(); i++) {
+			char c = s.charAt(i);
+			if (Character.isLetter(c)) {
+				if (h.containsKey(c)) {
+					int count = h.get(c);
+					h.put(c, count + 1);
+				} else {
+					h.put(c, 1);
+				}
+				countOfCharacters++;
+			}
+
+		}
+		
+		if (countOfCharacters % 2 == 0) {
+			for (int i : h.values()) {
+				if (i % 2 != 0) {
+					return false;
+				}
+			}
+		} else {
+			int countOfOdd = 0;
+			for (int i : h.values()) {
+				if (i % 2 != 0) {
+					if (countOfOdd < 1) {
+						countOfOdd = 1;
+					} else {
+						return false;
+					}
+				}
+			}
+		}
+		
+		return true;
+	}
+	
+	/*
+	 * Problem 1.5
+	 * There are 3 types of edits that can be performed on strings: insert a character,
+	 * remove a character, or replace a character. given two strings, write a function to check if they are one edit (or zero edits) away
+	 */
+	
+	static boolean oneOrLessEdits(String s, String t) {
+		if (Math.abs(s.length() - t.length()) > 1) {
+			return false;
+		}
+		HashMap<Character, Integer> sh = populateCharCount(s);
+		HashMap<Character, Integer> th = populateCharCount(t);
+		int differenceOfOne = 0; // We can have at most 2 of these and still be 1 edit away
+		for (char c : sh.keySet()) {
+			int difference = Math.abs(sh.getOrDefault(c, 0) - th.getOrDefault(c, 0));
+			if (difference > 1) {
+				return false;
+			} else if (difference == 1) {
+				if (differenceOfOne == 2) {
+					return false;
+				}
+				differenceOfOne++;
+			}
+		}
+		for (char c : th.keySet()) {
+			int difference = Math.abs(sh.getOrDefault(c, 0) - th.getOrDefault(c, 0));
+			if (difference > 1) {
+				return false;
+			} else if (difference == 1) {
+				if (differenceOfOne == 2) {
+					return false;
+				}
+				differenceOfOne++;
+			}
+		}
+		return true;
+	}
+	
+	static HashMap<Character, Integer> populateCharCount(String s){
+		HashMap<Character, Integer> h = new HashMap<>();
+		for (int i = 0; i < s.length(); i++) {
+			char c = s.charAt(i);
+			if (h.containsKey(c)) {
+				int count = h.get(c);
+				h.put(c, count + 1);
+			} else {
+				h.put(c, 1);
+			}
+		}
+		return h;
 	}
 
 }
