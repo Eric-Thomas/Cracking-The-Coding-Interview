@@ -25,8 +25,8 @@ public class Main {
         }
     }
     /*
-     * Problem 1.1
-     * Write an algorithm to determine if a string has all unique characters
+     Problem 1.1 Is Unique
+     Write an algorithm to determine if a string has all unique characters
      */
     static boolean isUnique(String s) {
         boolean[] characters = new boolean[128]; // ASCII
@@ -40,8 +40,8 @@ public class Main {
     }
 
     /*
-     * Problem 1.2
-     * Check to see if 2 strings are permutations of each other
+     Problem 1.2 Check Permutation
+     Check to see if 2 strings are permutations of each other
      */
     static boolean isPermutation(String s1, String s2) {
         if (s1.length() != s2.length()) {
@@ -78,10 +78,10 @@ public class Main {
     }
 
     /*
-     * Problem 1.3
-     * Write a method to replace all spaces in a string with $%20. You may assume
-     * string has sufficient space at the end to hold the additional characters and you are
-     * given the true length of the string.
+     Problem 1.3 URLify
+     Write a method to replace all spaces in a string with $%20. You may assume
+     string has sufficient space at the end to hold the additional characters and you are
+     given the true length of the string.
      */
     static String urlify(String s, int l) {
         char[] c = new char[s.length()];
@@ -101,10 +101,9 @@ public class Main {
     }
 
     /*
-     * Problem 1.4
-     * Write a method to determine if a given string is a permutation of
-     * a palindrome. Ignore casing and non-letters
-     *
+     Problem 1.4 Palindrome Permutation
+     Write a method to determine if a given string is a permutation of
+     a palindrome. Ignore casing and non-letters
      */
 
     static boolean isPermOfPalindrome(String s) {
@@ -148,9 +147,9 @@ public class Main {
     }
 
     /*
-     * Problem 1.5
-     * There are 3 types of edits that can be performed on strings: insert a character,
-     * remove a character, or replace a character. given two strings, write a function to check if they are one edit (or zero edits) away
+     Problem 1.5 One Away
+     There are 3 types of edits that can be performed on strings: insert a character,
+     remove a character, or replace a character. given two strings, write a function to check if they are one edit (or zero edits) away
      */
 
     static boolean oneOrLessEdits(String s, String t) {
@@ -200,7 +199,7 @@ public class Main {
     }
 
     /*
-    Problem 1.6
+    Problem 1.6 String compression
     Implement a method to perform basic string compression using the counts of repeated characters. For example
     aabcccccaaa would become a2b1c5a3. If the compressed string would not become smaller return the original string.
     Assume only uppercase and lowercase letters
@@ -233,6 +232,11 @@ public class Main {
 
     }
 
+    /*
+    Problem 1.7 Rotate Matrix
+    Give an image representated by an NxN matrix where each pixel in the image is represented by an integer, write a
+    method to rotate the image by 90 degrees. Can you do this in place?
+     */
     static void rotate(int[][] m){
         for (int layer = 0; layer < m.length / 2; layer ++){
             int firstOfLayer = layer;
