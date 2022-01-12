@@ -1,5 +1,4 @@
 *.class
-src
 .classpath
 .project
 .idea
