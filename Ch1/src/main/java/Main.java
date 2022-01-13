@@ -15,10 +15,17 @@ public class Main {
 //        System.out.println(oneOrLessEdits("pale", "bake"));
 //        System.out.println(compress("aabcccccaaa"));
 //        System.out.println(compress("EricRulz"));
-        int [][] m = {{1, 2, 3, 4}, {5, 6, 7, 8}, {9, 10, 11, 12}, {13, 14, 15, 16}};
-        rotate(m);
+//        int [][] m = {{1, 2, 3, 4}, {5, 6, 7, 8}, {9, 10, 11, 12}, {13, 14, 15, 16}};
+//        rotate(m);
+//        printMatrix(m);
+        int[][] m = {{1, 2, 3, 4}, {5, 6, 7, 0}, {33, 8, 9, 10}};
+        zeroMatrix(m);
+        printMatrix(m);
+    }
+
+    static void printMatrix(int[][] m){
         for (int i = 0; i < m.length; i++){
-            for (int j = 0; j < m.length; j++){
+            for (int j = 0; j < m[i].length; j++){
                 System.out.print(m[i][j] + "\t");
             }
             System.out.println();
@@ -258,7 +265,53 @@ public class Main {
                 m[i][lastOfLayer] = top;
             }
         }
+    }
 
+    /*
+    Problem 1.8 Zero Matrix
+    Write an algorithm such that if an element in an M x N matrix is 0, its entire row and column are set to 0
+     */
+
+    static void zeroMatrix(int[][] m){
+        boolean[] zeroedRows = new boolean[m.length];
+        boolean[] zeroedColumns = new boolean[m[0].length];
+
+        // Find all rows and columns with 0 in it
+        for (int row = 0; row < m.length; row++){
+            for (int column = 0; column < m[row].length; column++){
+                if (m[row][column] == 0){
+                    System.out.println("row "  + row + " column " + column + " zeroed out");
+                    zeroedRows[row] = true;
+                    zeroedColumns[column] = true;
+                }
+            }
+        }
+
+        // zero out rows
+        for (int i = 0; i < zeroedRows.length; i++){
+            if (zeroedRows[i]){
+                zeroOutRow(m, i);
+            }
+        }
+
+        // zero out columns
+        for (int i = 0; i < zeroedColumns.length; i++){
+            if (zeroedColumns[i]){
+                zeroOutColumn(m, i);
+            }
+        }
+    }
+
+    static void zeroOutRow(int[][] m, int row){
+        for (int i = 0; i < m[row].length; i++){
+            m[row][i] = 0;
+        }
+    }
+
+    static void zeroOutColumn(int[][] m, int column){
+        for (int i = 0; i < m.length; i++){
+            m[i][column] = 0;
+        }
     }
 
 }
