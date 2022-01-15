@@ -18,9 +18,10 @@ public class Main {
 //        int [][] m = {{1, 2, 3, 4}, {5, 6, 7, 8}, {9, 10, 11, 12}, {13, 14, 15, 16}};
 //        rotate(m);
 //        printMatrix(m);
-        int[][] m = {{1, 2, 3, 4}, {5, 6, 7, 0}, {33, 8, 9, 10}};
-        zeroMatrix(m);
-        printMatrix(m);
+//        int[][] m = {{1, 2, 3, 4}, {5, 6, 7, 0}, {33, 8, 9, 10}};
+//        zeroMatrix(m);
+//        printMatrix(m);
+//        System.out.println(isRotation("waterbottle", "erbottlewat"));
     }
 
     static void printMatrix(int[][] m){
@@ -312,6 +313,26 @@ public class Main {
         for (int i = 0; i < m.length; i++){
             m[i][column] = 0;
         }
+    }
+
+    /*
+    1.9 String Rotation
+    Assume you a method isSubstring which checks if one word is a substring of another. Given 2 strings s1 and s2,
+    write a code block to check if s2 is a rotation of s1 using only one call to isSubstring (eg., "waterbottle
+    is a rotation of "erbottlewat")
+     */
+    static boolean isRotation(String s1, String s2){
+        if (s1.length() != s2.length() || s1.length() == 0){
+            return false;
+        }
+
+        String s1Repeated = s1 + s1;
+        return isSubstring(s2, s1Repeated);
+
+    }
+
+    private static boolean isSubstring(String s1, String s2){
+        return s2.contains(s1);
     }
 
 }
