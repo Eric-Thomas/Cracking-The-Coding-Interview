@@ -5,6 +5,7 @@ import java.util.HashSet;
 public class LinkedList {
     Node head;
 
+    // Made public only because some problems require Nodes as parameter
     public static class Node{
         Node next = null;
         int data;
@@ -108,5 +109,60 @@ public class LinkedList {
         Node next = n.next;
         n.data = next.data;
         n.next = next.next;
+    }
+
+    /*
+    Problem 2.4 Partition
+    Write code to partition a linked list around a value x, such that all nodes less than x come before all nodes
+    greater than or equal to x. (IMPORTANT: The partition element x can appear anywhere in the "right partition";
+    it does not need to appear between the left and right partitions.
+     */
+
+    public void partition(int x) throws Exception {
+        // find partition node
+        Node current = head;
+        Node partition = null;
+        while (current != null){
+            if (current.data == x){
+                partition = current;
+                break;
+            }
+            current = current.next;
+        }
+
+        if (partition == null){
+            throw new Exception(x + " cannot be the partition because it is not in the list");
+        }
+        Node lessThanHead = null;
+        Node lessThantail = null;
+        Node greaterThanHead = new Node(partition.data);
+        Node greaterThanTail = greaterThanHead;
+        current = head;
+        // Split into < list and >= list
+        while (current != null){
+            Node temp = new Node(current.data);
+            if (current.data < x){
+                if (lessThanHead == null){
+                    lessThanHead = temp;
+                    lessThantail = lessThanHead;
+                } else {
+                    lessThantail.next = temp;
+                    lessThantail = temp;
+                }
+            } else if (current != partition) {
+                greaterThanTail.next = temp;
+                greaterThanTail = temp;
+            }
+            current = current.next;
+        }
+
+        if (lessThanHead == null) {
+            head = greaterThanHead;
+        } else {
+            lessThantail.next = greaterThanHead;
+            head = lessThanHead;
+        }
+
+
     }
 }
